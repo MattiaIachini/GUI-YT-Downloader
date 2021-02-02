@@ -1,6 +1,8 @@
 # GUI-YT-Downloader
  I'm creating a GUI for the youtube-downloader-converter created by NeuralNine with tkinter, link in below:  https://github.com/NeuralNine/youtube-downloader-converter
 
+to start the program open the main.py, to hide the console rename the exstension with .pyw
+
 //README.md of NeuralNine:
 
 A simple Python script that is able to download YouTube videos or playlists and convert them into MP3.
