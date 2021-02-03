@@ -5,17 +5,81 @@ import pytube
 import youtube_downloader
 import file_converter
 
-def svuota():
-    btMp4.grid_remove()
-    btMp3.grid_remove()
-    btPlaylistMp4.grid_remove()
-    btPlaylistMp3.grid_remove()
+def svuota1():
+    titolo.place_forget()
+    btMp4.place_forget()
+    btMp3.place_forget()
+    btPlaylistMp4.place_forget()
+    btPlaylistMp3.place_forget()
+    btQuit.place_forget()
 
-
+def svuota2():
+    titoloURL.place_forget()
+    URL.place_forget()
+    btDownload.place_forget()
+    btBack.place_forget()
+    div.place_forget()
+    info.place_forget()
+    radioQLow.place_forget()
+    radioQMedium.place_forget()
+    radioQHigh.place_forget()
+    radioQVeryHigh.place_forget()
 
 def perMP4():
-    svuota()
-    btQuality.grid(row = 0, column = 0, padx = 120, pady = 10)
+    svuota1()
+    titoloURL.place(x = 275, y = 40)
+    URL.place(x = 100, y = 60)
+    btDownload.place(x = 400, y = 110)
+    btBack.place(x = 10, y = 10)
+    div.place(x = 100, y = 175)
+    info.place(x = 0, y = 0)
+    radioQLow.place(x = 100, y = 110)
+    radioQMedium.place(x = 160, y = 110)
+    radioQHigh.place(x = 220, y = 110)
+    radioQVeryHigh.place(x = 280, y = 110)
+
+def perMP3():
+    svuota1()
+    titoloURL.place(x = 275, y = 40)
+    URL.place(x = 100, y = 60)
+    btDownload.place(x = 400, y = 110)
+    btBack.place(x = 10, y = 10)
+    div.place(x = 100, y = 175)
+    info.place(x = 0, y = 0)
+
+def indietro():
+    svuota2()
+    titolo.place(x = 230, y = 10)
+    btMp4.place(x = 130, y = 50)
+    btMp3.place(x = 130, y = 80)
+    btPlaylistMp4.place(x = 350, y = 50)
+    btPlaylistMp3.place(x = 350, y = 80)
+    btQuit.place(x = 565, y = 270)
+
+def selection(): 
+    if  radioQLow.select():
+        radioQMedium.deselect()
+        radioQHigh.deselect()
+        radioQVeryHigh.deselect()
+        quality = 0
+
+    if  radioQMedium.select():
+        radioQLow.deselect()
+        radioQHigh.deselect()
+        radioQVeryHigh.deselect()
+        quality = 1
+
+    if  radioQHigh.select():
+        radioQMedium.deselect()
+        radioQLow.deselect()
+        radioQVeryHigh.deselect()
+        quality = 2
+
+    if  radioQVeryHigh.select():
+        radioQMedium.deselect()
+        radioQLow.deselect()
+        radioQHigh.deselect()
+        quality = 3
 
 
 
@@ -24,47 +88,67 @@ window.geometry("600x300")
 window.title("YouTube Downloader");
 window.resizable(False, False)
 window.configure(background = '#262626')
-#Home____________________________________________________________________________________________
-
+#Dichiarazione____________________________________________________________________________________
+radio = IntVar()
+btQuit = tk.Button(text = "Exit", bd = 0, command = exit)
 btMp4 = tk.Button(text = "Download MP4", bd = 0, command = perMP4)
-btMp3 = tk.Button(text = "Download MP3", bd = 0)
-btPlaylistMp4 = tk.Button(text = "Download Playlist MP4", bd = 0)
-btPlaylistMp3 = tk.Button(text = "Download Playlist MP3", bd = 0)
+btMp3 = tk.Button(text = "Download MP3", bd = 0, command = perMP3)
+btPlaylistMp4 = tk.Button(text = "Download Playlist MP4", bd = 0, command = perMP4)
+btPlaylistMp3 = tk.Button(text = "Download Playlist MP3", bd = 0, command = perMP3)
+titolo = tk.Label(text = "Seleziona un'opzione:")
+titoloURL = tk.Label(text = "URL:")
+btDownload = tk.Button(text = "Download", bd = 0)
+btBack = tk.Button(text = "Back", bd = 0, command = indietro)
+URL = tk.Entry(width = 65, background = '#5C5B5D', bd = 0)
+div = tk.Frame(width = 390, height = 100)
+info = tk.Label(div, text = "")
+radioQLow = tk.Radiobutton(window, text="Bassa", value = 0, variable = radio, command = selection)
+radioQMedium = tk.Radiobutton(window, text="Media", value = 1, variable = radio, command = selection)
+radioQHigh = tk.Radiobutton(window, text="Alta", value = 2, variable = radio, command = selection)
+radioQVeryHigh = tk.Radiobutton(window, text="Molto Alta", value = 3, variable = radio, command = selection)
+
+#titoli
+titolo.place(x = 230, y = 10)
+titolo.configure(background = '#262626', foreground="white")
+titoloURL.configure(background = '#262626', foreground="white")
+
+#radio
+radioQLow.configure(background = '#262626', foreground="white")
+radioQMedium.configure(background = '#262626', foreground="white")
+radioQHigh.configure(background = '#262626', foreground="white")
+radioQVeryHigh.configure(background = '#262626', foreground="white")
+
+#btDownload
+btDownload.configure(background = '#5C5B5D')
+
+#btBack
+btBack.configure(background = '#5C5B5D')
+
+#btQuit
+btQuit.place(x = 565, y = 270)
+btQuit.configure(background = '#5C5B5D')
 
 #btMp4
-btMp4.grid(row = 0, column = 0, padx = 120, pady = 10)
+btMp4.place(x = 130, y = 50)
 btMp4.configure(background = '#FF7500')
 
 #btMp3
-btMp3.grid(row = 1, column = 0)
+btMp3.place(x = 130, y = 80)
 btMp3.configure(background = '#006DFF')
 
 #btPlaylistMp4
-btPlaylistMp4.grid(row = 0, column = 1, padx = 30, pady = 10)
+btPlaylistMp4.place(x = 350, y = 50)
 btPlaylistMp4.configure(background = '#FF7500')
 
 #btPlaylistMp3
-btPlaylistMp3.grid(row = 1, column = 1)
+btPlaylistMp3.place(x = 350, y = 80)
 btPlaylistMp3.configure(background = '#006DFF')
 
 #Generale________________________________________________________________________________________
 testo = tk.Label(text = "Link youtube:")
 
-
 #MP4_____________________________________________________________________________________________
-btQuality = tk.Menubutton(text = 'qualita')
-btQuality.menu = tk.Menu(btQuality)
-btQuality['menu'] = btQuality.menu
-low = 0
-medium = 1
-high = 2
-very_high = 3
 
-btQuality.menu.add_checkbutton(label = 'bassa', variable = low)
-btQuality.menu.add_checkbutton(label = 'media', variable = medium)
-btQuality.menu.add_checkbutton(label = 'alta', variable = high)
-btQuality.menu.add_checkbutton(label = 'suprema', variable = very_high)
- 
 
 #MP3_____________________________________________________________________________________________
 
