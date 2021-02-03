@@ -1,4 +1,3 @@
-from functools import partial
 from tkinter import *
 import tkinter as tk
 import pytube
@@ -112,12 +111,13 @@ def formatMP3PlaylistDownload():
     youtube_downloader.download_playlistMP3(link, quality)
 
 
-
+#windows__________________________________________________________________________________________
 window = tk.Tk()
 window.geometry("600x300")
 window.title("YouTube Downloader");
 window.resizable(False, False)
 window.configure(background = '#262626')
+
 #Dichiarazione____________________________________________________________________________________
 radio = IntVar()
 btQuit = tk.Button(text = "Exit", bd = 0, command = exit)
@@ -174,61 +174,6 @@ btPlaylistMp4.configure(background = '#FF7500')
 btPlaylistMp3.place(x = 350, y = 80)
 btPlaylistMp3.configure(background = '#006DFF')
 
-#Generale________________________________________________________________________________________
-testo = tk.Label(text = "Link youtube:")
-
-#MP4_____________________________________________________________________________________________
-
-
-#MP3_____________________________________________________________________________________________
-
-
-#PlaylistMP4_____________________________________________________________________________________
-
-
-#PlaylistMP3_____________________________________________________________________________________
-
-
-
-
 #________________________________________________________________________________________________
 if __name__ == "__main__":
     window.mainloop()
-
-
-
-    
-
-"""
-print('''
-What do you want?
-
-(1) Download YouTube Videos Manually
-(2) Download a YouTube Playlist
-(3) Download YouTube Videos and Convert Into MP3
-
-''')
-
-choice = input("Choice: ")
-
-if choice == "1" or choice == "2":
-    quality = input("Please choose a quality (low, medium, high, very high):")
-    if choice == "2":
-        link = input("Enter the link to the playlist: ")
-        print("Downloading playlist...")
-        youtube_downloader.download_playlist(link, quality)
-        print("Download finished!")
-    if choice == "1":
-        links = youtube_downloader.input_links()
-        for link in links:
-            youtube_downloader.download_video(link, quality)
-elif choice == "3":
-    links = youtube_downloader.input_links()
-    for link in links:
-        print("Downloading...")
-        filename = youtube_downloader.download_video(link, 'low')
-        print("Converting...")
-        file_converter.convert_to_mp3(filename)
-else:
-    print("Invalid input! Terminating...")
-"""
