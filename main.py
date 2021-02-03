@@ -81,6 +81,36 @@ def selection():
         radioQHigh.deselect()
         quality = 3
 
+def formatMP4Download():
+    link = URL.get()
+    if radio.get() == 0:
+        quality = "low"
+    if radio.get() == 1:
+        quality = "medium"
+    if radio.get() == 2:
+        quality = "high"
+    if radio.get() == 3:
+        quality = "very high"
+    youtube_downloader.download_video(link, quality)
+    info.config(text = "Download MP4 di: " + link)
+
+def formatMP3Downlaod():
+    link = URL.get()
+    info.config(text = "Download MP4 di: " + link)
+    filename = youtube_downloader.download_video(link, 'low')
+    info.config(text = "Convert to MP3 di: " + link)
+    file_converter.convert_to_mp3(filename)
+
+def formatMP4PlaylistDownload():
+    link = URL.get()
+    info.config(text = "Download MP4 di: " + link)
+    youtube_downloader.download_playlist(link, quality)
+
+def formatMP3PlaylistDownload():
+    link = URL.get()
+    info.config(text = "Download Playlist e conversione di: " + link)
+    youtube_downloader.download_playlistMP3(link, quality)
+
 
 
 window = tk.Tk()
@@ -97,7 +127,7 @@ btPlaylistMp4 = tk.Button(text = "Download Playlist MP4", bd = 0, command = perM
 btPlaylistMp3 = tk.Button(text = "Download Playlist MP3", bd = 0, command = perMP3)
 titolo = tk.Label(text = "Seleziona un'opzione:")
 titoloURL = tk.Label(text = "URL:")
-btDownload = tk.Button(text = "Download", bd = 0)
+btDownload = tk.Button(text = "Download", bd = 0, command = formatMP4Download)
 btBack = tk.Button(text = "Back", bd = 0, command = indietro)
 URL = tk.Entry(width = 65, background = '#5C5B5D', bd = 0)
 div = tk.Frame(width = 390, height = 100)

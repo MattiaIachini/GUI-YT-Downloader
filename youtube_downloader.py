@@ -1,4 +1,5 @@
 import pytube
+import file_converter
 
 def download_video(url, resolution):
     itag = choose_resolution(resolution)
@@ -14,6 +15,15 @@ def download_videos(urls, resolution):
 def download_playlist(url, resolution):
     playlist = pytube.Playlist(url)
     download_videos(playlist.video_urls, resolution)
+
+def download_playlistMP3(url, resolution):
+    playlist = pytube.Playlist(url)
+    download_videosMP3(playlist.video_urls, resolution)
+
+def download_videosMP3(urls, resolution):
+    for url in urls:
+        filename = download_video(url, resolution)
+        file_converter.convert_to_mp3(filename)
 
 def choose_resolution(resolution):
     if resolution in ["low", "360", "360p"]:
